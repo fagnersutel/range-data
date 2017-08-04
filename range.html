@@ -1,0 +1,179 @@
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  
+  
+
+  
+  
+  
+
+  
+
+  <script type="text/javascript" src="jquery-git.js"></script>
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="result-light.css">
+  
+
+  
+    
+      <script type="text/javascript" src="http://ionden.com/a/plugins/ion.rangeSlider/static/js/ion-rangeSlider/ion.rangeSlider.js"></script>
+    
+  
+    
+      <link rel="stylesheet" type="text/css" href="http://ionden.com/a/plugins/ion.rangeSlider/static/css/ion.rangeSlider.css">
+    
+  
+    
+      <link rel="stylesheet" type="text/css" href="http://ionden.com/a/plugins/ion.rangeSlider/static/css/ion.rangeSlider.skinFlat.css">
+    
+  
+
+  <style type="text/css">
+    body {
+    height: 100%;
+    margin: 40px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+.range-slider {
+    position: relative;
+    height: 80px;
+}
+.extra-controls {
+    position: relative;
+    border-top: 3px solid #000;
+    padding: 10px 0 0;
+}
+
+.inp {
+    font-size: 18px;
+    width: 40px;
+    text-align: center;
+    padding: 5px;
+}
+.inp + .inp {
+    float: right;
+}
+  </style>
+
+  <title>ion.rangeSlider and 2 inputs</title>
+
+  
+    
+
+
+
+
+<script type="text/javascript">//<![CDATA[
+$(function(){
+var $range = $(".js-range-slider"),
+    $from = $(".js-from"),
+    $to = $(".js-to"),
+    range,
+    min = 0,
+    max = 2000,
+    from,
+    to;
+
+var updateValues = function () {
+    $from.prop("value", from);
+    $to.prop("value", to);
+};
+
+$range.ionRangeSlider({
+    type: "double",
+    min: min,
+    max: max,
+    prettify_enabled: false,
+    grid: true,
+    grid_num: 10,
+    onChange: function (data) {
+        from = data.from;
+        to = data.to;
+        
+        updateValues();
+    }
+});
+
+range = $range.data("ionRangeSlider");
+
+var updateRange = function () {
+    range.update({
+        from: from,
+        to: to
+    });
+};
+
+$from.on("change", function () {
+    from = +$(this).prop("value");
+    if (from < min) {
+        from = min;
+    }
+    if (from > to) {
+        from = to;
+    }
+
+    updateValues();    
+    updateRange();
+});
+
+$to.on("change", function () {
+    to = +$(this).prop("value");
+    if (to > max) {
+        to = max;
+    }
+    if (to < from) {
+        to = from;
+    }
+
+    updateValues();    
+    updateRange();
+});
+
+
+
+});//]]> 
+
+</script>
+
+  
+</head>
+
+<body>
+<form action="#" method="GET">
+<div class="range-slider">
+    <input type="text" class="js-range-slider" value="" />
+</div>
+<div class="extra-controls">
+    <input type="text" maxlength="4" value="0" name="teste1" class="inp js-from" />
+    <input type="text" maxlength="4" value="1000" name="teste2" class="inp js-to" />
+</div>
+<input type="submit" value="enviar">
+</form>
+  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "None"
+    }], "*")
+  }
+</script>
+
+
+
+
+
+</body></html>
